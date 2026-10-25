@@ -2,7 +2,7 @@
 import struct, zlib
 
 def png(size, path):
-    bg, fg = (79, 70, 229), (255, 255, 255)
+    bg, fg = (27, 31, 59), (242, 200, 121)
     c, r = size / 2, size * 0.28
     rows = []
     for y in range(size):
