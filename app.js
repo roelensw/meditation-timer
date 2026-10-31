@@ -244,8 +244,20 @@ function setPaused(value) {
 
 // The completion view reuses the session screen: the ring stays full around the tree.
 function showComplete(complete) {
-  for (const id of ['tree', 'thanks', 'close']) $(id).hidden = !complete;
+  if (complete) { shownQuotes.clear(); showQuote(); }
+  for (const id of ['tree', 'thanks', 'quote', 'close']) $(id).hidden = !complete;
   for (const id of ['phase', 'time', 'pause', 'cancel']) $(id).hidden = complete;
+}
+
+// Each quote appears once per completion screen, until all have been shown.
+const shownQuotes = new Set();
+
+function showQuote() {
+  if (shownQuotes.size >= QUOTES.length) shownQuotes.clear();
+  let i;
+  do { i = Math.floor(Math.random() * QUOTES.length); } while (shownQuotes.has(i));
+  shownQuotes.add(i);
+  [$('quote-author').textContent, $('quote-text').textContent] = QUOTES[i];
 }
 
 function show(running) {
@@ -339,6 +351,10 @@ $('start').addEventListener('click', startSession);
 $('pause').addEventListener('click', () => togglePause?.());
 $('cancel').addEventListener('click', () => { endTimer(); showComplete(true); });
 $('close').addEventListener('click', stopSession);
+$('quote-next').addEventListener('click', (e) => {
+  showQuote();
+  e.currentTarget.classList.toggle('spin');
+});
 
 $('instruction').maxLength = MAX_INSTRUCTION;
 $('instruction').placeholder = DEFAULT_INSTRUCTION;

@@ -135,6 +135,14 @@ button.primary {
 #cancel { margin: -32px 0 0; }
 #tree { position: absolute; inset: 7%; width: 86%; height: 86%; border-radius: 50%; animation: fade 1.2s ease both; }
 #thanks { margin: 0; text-align: center; font-size: 1.25rem; color: var(--accent); animation: fade 1.2s ease both; }
+#quote { margin: 0; max-width: 32ch; text-align: center; animation: fade 1.2s ease both; animation-delay: .6s; }
+#quote blockquote { margin: 0; font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 1.05rem; line-height: 1.5; }
+#quote blockquote::before { content: '\201C'; }
+#quote blockquote::after { content: '\201D'; }
+#quote figcaption { margin-top: 10px; font-size: .8rem; letter-spacing: .08em; color: var(--accent); }
+#quote figcaption::before, #quote figcaption::after { content: '~'; margin: 0 .6em; color: var(--muted); }
+#quote-next { margin: 6px auto 0; height: 36px; width: 36px; }
+#quote-next.spin svg { transform: rotate(360deg); }
 button.primary svg { width: 16px; height: 16px; fill: currentColor; }
 #session.paused #orb::before { animation-play-state: paused; }
 #session.paused #time { opacity: .5; }
@@ -143,6 +151,6 @@ button.primary svg { width: 16px; height: 16px; fill: currentColor; }
 @keyframes breathe { 0%, 100% { transform: scale(.85); opacity: .6; } 50% { transform: scale(1.1); opacity: 1; } }
 @keyframes fade { from { opacity: 0; transform: translateY(-4px); } }
 @media (prefers-reduced-motion: reduce) {
-  #orb::before, #tree, #thanks { animation: none; }
+  #orb::before, #tree, #thanks, #quote { animation: none; }
   button, #ring { transition: none; }
 }
