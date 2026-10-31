@@ -30,7 +30,6 @@ section { flex: 1; display: flex; flex-direction: column; }
 h1 { margin: 64px 0 0; text-align: center; font-size: 1.25rem; font-weight: 300; letter-spacing: .4em; text-indent: .4em; text-transform: uppercase; }
 h2 { margin: 0 0 16px; font-size: .75rem; font-weight: 500; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
 header { margin-bottom: 64px; }
-#done { margin: 16px 0 0; text-align: center; font-size: .875rem; color: var(--accent); animation: fade 1.2s ease both; }
 
 .group { margin-bottom: 32px; }
 .row { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -140,6 +139,9 @@ button.primary {
 #pause .play-icon, #session.paused #pause .pause-icon { display: none; }
 #session.paused #pause .play-icon { display: block; }
 #cancel { margin: -32px 0 0; }
+#close { margin: 0; }
+#tree { position: absolute; inset: 7%; width: 86%; height: 86%; border-radius: 50%; animation: fade 1.2s ease both; }
+#thanks { margin: 0; text-align: center; font-size: 1.25rem; color: var(--accent); animation: fade 1.2s ease both; }
 button.primary svg { width: 16px; height: 16px; fill: currentColor; }
 #session.paused #orb::before { animation-play-state: paused; }
 #session.paused #time { opacity: .5; }
@@ -148,6 +150,6 @@ button.primary svg { width: 16px; height: 16px; fill: currentColor; }
 @keyframes breathe { 0%, 100% { transform: scale(.85); opacity: .6; } 50% { transform: scale(1.1); opacity: 1; } }
 @keyframes fade { from { opacity: 0; transform: translateY(-4px); } }
 @media (prefers-reduced-motion: reduce) {
-  #orb::before, #done { animation: none; }
+  #orb::before, #tree, #thanks { animation: none; }
   button, #ring { transition: none; }
 }

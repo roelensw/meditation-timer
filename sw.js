@@ -1,5 +1,5 @@
 // Bump CACHE on every deploy so clients drop old files.
-const CACHE = 'meditate-v29';
+const CACHE = 'meditate-v31';
 const ASSETS = ['./', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {

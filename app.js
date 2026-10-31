@@ -239,13 +239,19 @@ function setPaused(value) {
   $('session').classList.toggle('paused', value);
 }
 
+// The completion view reuses the session screen: the ring stays full around the tree.
+function showComplete(complete) {
+  for (const id of ['tree', 'thanks', 'close']) $(id).hidden = !complete;
+  for (const id of ['phase', 'time', 'pause', 'cancel']) $(id).hidden = complete;
+}
+
 function show(running) {
   $('setup').hidden = running;
   $('session').hidden = !running;
 }
 
 function startSession() {
-  $('done').hidden = true;
+  showComplete(false);
   $('ring').style.strokeDashoffset = 100;
   setPaused(false);
   if (!settings.muted) unlockAudio();
@@ -275,9 +281,9 @@ function startSession() {
   };
 
   const finish = () => {
-    stopSession();
-    $('done').textContent = `Session complete · ${settings.minutes} min`;
-    $('done').hidden = false;
+    endTimer();
+    $('ring').style.strokeDashoffset = 0;
+    showComplete(true);
     playBells(settings.sound, settings.bells);
   };
 
@@ -302,7 +308,7 @@ function startSession() {
   update();
 }
 
-function stopSession() {
+function endTimer() {
   clearInterval(timer);
   timer = null;
   togglePause = null;
@@ -313,12 +319,17 @@ function stopSession() {
     setPaused(false);
   }
   releaseScreen();
+}
+
+function stopSession() {
+  endTimer();
   show(false);
 }
 
 $('start').addEventListener('click', startSession);
 $('pause').addEventListener('click', () => togglePause?.());
-$('cancel').addEventListener('click', stopSession);
+$('cancel').addEventListener('click', () => { endTimer(); showComplete(true); });
+$('close').addEventListener('click', stopSession);
 
 $('instruction').maxLength = MAX_INSTRUCTION;
 $('instruction').placeholder = DEFAULT_INSTRUCTION;
