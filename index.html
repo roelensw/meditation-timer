@@ -21,16 +21,24 @@
 
       <div class="group">
         <h2>Duration</h2>
-        <div id="presets" class="row presets"></div>
+        <div id="presets" class="tiles presets"></div>
       </div>
 
       <details id="options">
         <summary>Settings</summary>
         <div class="panel">
           <div class="group">
-            <h2>Singing bowl</h2>
-            <div id="sounds" class="row"></div>
-            <button id="preview" class="text">&#9654;&ensp;Listen</button>
+            <h2>Bowl or bell</h2>
+            <div id="sounds" class="tiles"></div>
+            <button id="preview" class="text">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg>
+              Listen
+            </button>
+          </div>
+
+          <div class="setting">
+            <span class="label">Sound</span>
+            <button id="mute" aria-label="Sound on or off">On</button>
           </div>
 
           <div class="setting">
@@ -60,11 +68,19 @@
             </div>
           </div>
 
+          <label class="setting field">
+            <span class="label">Instruction</span>
+            <input id="instruction" type="text" autocomplete="off" enterkeyhint="done">
+          </label>
+
           <p id="audio-note" role="status"></p>
         </div>
       </details>
 
-      <button id="start" class="primary">Begin</button>
+      <button id="start" class="primary">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
+        Begin session
+      </button>
     </section>
 
     <section id="session" hidden>
@@ -76,7 +92,15 @@
         </svg>
         <div id="time"></div>
       </div>
-      <button id="cancel" class="text">End session</button>
+      <button id="pause">
+        <svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+        <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
+        <span>Pause</span>
+      </button>
+      <button id="cancel" class="primary">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>
+        End session
+      </button>
     </section>
   </main>
   <script src="app.js"></script>
