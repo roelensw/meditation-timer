@@ -15,27 +15,27 @@ const MAX_GAP = 20;
 const icon = (paths) => `<svg viewBox="0 0 32 32" aria-hidden="true">${paths}</svg>`;
 const SOUNDS = {
   large: {
-    label: 'Large', freq: 165, click: .10,
+    label: 'Large', full: 'Large bowl', freq: 165, click: .10,
     partials: [[1, 1, 14, .25], [2.72, .6, 9, .3], [5.15, .25, 4, .35], [8.3, .08, 2, .4]],
     icon: icon('<path d="M2 12h28c0 8-6 14-14 14S2 20 2 12z"/><path d="M11 29h10"/>'),
   },
   small: {
-    label: 'Small', freq: 392, click: .12,
+    label: 'Small', full: 'Small bowl', freq: 392, click: .12,
     partials: [[1, 1, 10, .3], [2.78, .5, 6, .35], [5.4, .2, 3, .4], [8.6, .07, 1.5, .4]],
     icon: icon('<path d="M8 15h16c0 6-3.5 10-8 10s-8-4-8-10z"/><path d="M12 28h8"/>'),
   },
   crystal: {
-    label: 'Crystal', freq: 523, click: .03,
+    label: 'Crystal', full: 'Crystal bowl', freq: 523, click: .03,
     partials: [[1, 1, 18, .2], [2, .12, 10, .2], [3, .05, 6, .2]],
     icon: icon('<ellipse cx="16" cy="11" rx="11" ry="3"/><path d="M5 11v11c0 3 5 5 11 5s11-2 11-5V11"/><path d="M27 2v5M24.5 4.5h5"/>'),
   },
   rin: {
-    label: 'Rin', freq: 440, click: .20,
+    label: 'Rin', full: 'Rin', freq: 440, click: .20,
     partials: [[1, 1, 12, .25], [2.43, .5, 8, .3], [4.2, .3, 5, .35], [6.9, .12, 2.5, .4]],
     icon: icon('<path d="M6 10h20c0 6-4 10-10 10S6 16 6 10z"/><ellipse cx="16" cy="26" rx="12" ry="3"/><path d="M26 2l-6 6"/>'),
   },
   tingsha: {
-    label: 'Tingsha', freq: 2000, click: .10,
+    label: 'Tingsha', full: 'Tingsha', freq: 2000, click: .10,
     partials: [[1, 1, 14, .7], [2.32, .35, 8, .5], [3.9, .15, 4, .4], [5.6, .05, 2, .4]],
     icon: icon('<circle cx="9" cy="22" r="6.5"/><circle cx="23" cy="22" r="6.5"/><circle cx="9" cy="22" r="2"/><circle cx="23" cy="22" r="2"/><path d="M9 22C9 4 23 4 23 22"/>'),
   },
@@ -166,6 +166,9 @@ function choice(container, items, isSelected, onPick) {
 function renderSetup() {
   choice($('presets'), PRESETS.map((m) => [m, 'min', `<strong>${m}</strong>`]), (m) => m === settings.minutes, (m) => { settings.minutes = m; store.set('minutes', m); });
   choice($('sounds'), Object.entries(SOUNDS).map(([k, s]) => [k, s.label, s.icon]), (k) => k === settings.sound, (k) => { settings.sound = k; store.set('sound', k); });
+  $('duration').textContent = `${settings.minutes} min`;
+  $('sound-summary').classList.toggle('off', settings.muted);
+  $('sound-name').textContent = settings.muted ? 'Off' : SOUNDS[settings.sound].full;
   $('mute').textContent = settings.muted ? 'Off' : 'On';
   $('mute').classList.toggle('selected', !settings.muted);
   $('mute').setAttribute('aria-pressed', !settings.muted);
@@ -325,6 +328,12 @@ function stopSession() {
   endTimer();
   show(false);
 }
+
+$('settings-toggle').addEventListener('click', () => {
+  const open = $('options').hidden;
+  $('options').hidden = !open;
+  $('settings-toggle').setAttribute('aria-expanded', open);
+});
 
 $('start').addEventListener('click', startSession);
 $('pause').addEventListener('click', () => togglePause?.());

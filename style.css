@@ -30,6 +30,12 @@ section { flex: 1; display: flex; flex-direction: column; }
 h1 { margin: 64px 0 0; text-align: center; font-size: 1.25rem; font-weight: 300; letter-spacing: .4em; text-indent: .4em; text-transform: uppercase; }
 h2 { margin: 0 0 16px; font-size: .75rem; font-weight: 500; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
 header { margin-bottom: 64px; }
+#duration { margin-left: .75em; color: var(--accent); }
+.duration-line h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; }
+#sound-summary { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); }
+#sound-summary svg { color: var(--muted); width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+#sound-summary .cross, #sound-summary.off .waves { display: none; }
+#sound-summary.off .cross { display: inline; }
 
 .group { margin-bottom: 32px; }
 .row { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -46,7 +52,7 @@ button {
   transition: background .25s, border-color .25s, color .25s, transform .15s;
 }
 button:active { transform: scale(.97); }
-button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 button.selected { background: var(--glow); border-color: var(--accent); color: var(--accent); }
 button.text { background: none; border: 0; color: var(--muted); }
 
@@ -58,26 +64,13 @@ button.tile svg { width: 28px; height: 28px; fill: none; stroke: currentColor; s
 .presets button { gap: 2px; padding: 16px 0 12px; }
 .presets strong { font-size: 1.5rem; font-weight: 300; line-height: 1.2; }
 
-details { margin-bottom: 32px; }
-summary {
-  cursor: pointer;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  list-style: none;
-  font-size: .75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: .16em;
-  color: var(--muted);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-summary::-webkit-details-marker { display: none; }
-summary::after { content: ''; width: 8px; height: 8px; border: solid var(--muted); border-width: 0 1px 1px 0; transform: rotate(45deg); transition: transform .3s; margin-right: 12px; }
-details[open] summary::after { transform: rotate(-135deg); }
-.panel { padding-top: 32px; }
+#options { margin-bottom: 32px; }
+.duration-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+.duration-line h2 { margin: 0; }
+button.icon { display: grid; place-items: center; width: 44px; padding: 0; background: none; border-color: transparent; color: var(--muted); }
+button.icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform .4s; }
+button.icon[aria-expanded="true"] { color: var(--accent); }
+button.icon[aria-expanded="true"] svg { transform: rotate(60deg); }
 #preview { display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; padding-left: 0; }
 #preview svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -134,12 +127,12 @@ button.primary {
 #orb circle { fill: none; stroke-width: 1; }
 #orb .track { stroke: var(--line); }
 #ring { stroke: var(--accent); stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset .5s linear; }
-#pause { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 16px; font-size: 1rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
+#pause, #close { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 16px; font-size: 1rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
 #pause svg { width: 16px; height: 16px; fill: currentColor; }
+#close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 #pause .play-icon, #session.paused #pause .pause-icon { display: none; }
 #session.paused #pause .play-icon { display: block; }
 #cancel { margin: -32px 0 0; }
-#close { margin: 0; }
 #tree { position: absolute; inset: 7%; width: 86%; height: 86%; border-radius: 50%; animation: fade 1.2s ease both; }
 #thanks { margin: 0; text-align: center; font-size: 1.25rem; color: var(--accent); animation: fade 1.2s ease both; }
 button.primary svg { width: 16px; height: 16px; fill: currentColor; }

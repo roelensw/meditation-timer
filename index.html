@@ -18,14 +18,26 @@
         <h1>Meditate</h1>
       </header>
 
-      <div class="group">
-        <h2>Duration</h2>
-        <div id="presets" class="tiles presets"></div>
+      <div class="group duration-line">
+        <h2>
+          <span>Duration <span id="duration"></span></span>
+          <span id="sound-summary">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path class="waves" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="cross" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+            <span id="sound-name"></span>
+          </span>
+        </h2>
+        <button id="settings-toggle" class="icon" aria-label="Settings" aria-expanded="false" aria-controls="options">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
       </div>
 
-      <details id="options">
-        <summary>Settings</summary>
+      <div id="options" hidden>
         <div class="panel">
+          <div class="group">
+            <h2>Duration</h2>
+            <div id="presets" class="tiles presets"></div>
+          </div>
+
           <div class="group">
             <h2>Bowl or bell</h2>
             <div id="sounds" class="tiles"></div>
@@ -74,7 +86,7 @@
 
           <p id="audio-note" role="status"></p>
         </div>
-      </details>
+      </div>
 
       <button id="start" class="primary">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
@@ -98,7 +110,10 @@
         <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
         <span>Pause</span>
       </button>
-      <button id="close" class="primary" hidden>Close</button>
+      <button id="close" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        Back
+      </button>
       <button id="cancel" class="primary">
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>
         End session
